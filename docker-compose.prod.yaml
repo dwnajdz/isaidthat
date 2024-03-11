@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  compose-production:
+    container_name: compose-production
+    build:
+      context: ./src
+      dockerfile: prod.Dockerfile
+    restart: always
+    ports:
+      - 80:80
+    #networks:
+    #  - prod_network
+
+  # Add more containers below (nginx, postgres, etc.)
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+#networks:
+#  prod_network:
+#    external: true
