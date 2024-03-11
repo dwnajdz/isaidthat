@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import InfiniteScroll from "./InfiniteScroll";
 import { useRouter } from "next/navigation";
-import { Listing } from "@/components/startups/Listing";
+import { Listing } from "@/components/tasks/Listing";
 import { rangeQuery} from "@/actions/tasks";
 
 type ItemsProps = {
@@ -58,7 +58,7 @@ export default function InfiniteListing({ initialItems, totalPosts, PAGE_VIEW_LI
       }
       element="main"
     >
-      <Listing startupList={items} showSearchBar={true} totalPosts={totalPosts} />
+      <Listing list={items} showSearchBar={true} totalPosts={totalPosts} />
     </InfiniteScroll>
   );
 }

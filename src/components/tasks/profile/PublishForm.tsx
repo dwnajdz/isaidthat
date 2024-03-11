@@ -1,18 +1,27 @@
 'use client'
 import { useState } from "react"
 import type { Task } from "@/types/Task";
+import markdownToHtml from "@/utils/markdown/markdownToHtml";
 
 export function PublishPostComponent({
   formAction,
   data,
   buttonText = "Add",
+  htmlPreview = "",
 }: {
   formAction: any,
   data: Task
   buttonText?: string,
+  htmlPreview?: string,
 }) {
-  const [isLoading, setIsLoading] = useState(false);
 
+  const [preview, setPreview] = useState(htmlPreview)
+  const handleLivePreview = async (e: any) => {
+    const markdownHtml = await markdownToHtml(e.target.value)
+    setPreview(markdownHtml)
+  }
+
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -39,21 +48,6 @@ export function PublishPostComponent({
             </div>
 
             <div className="mb-6">
-              <label className="block mb-2 text-lg text-text">Description
-                <span className="text-gray-500 dark:text-gray-400 text-sm ml-2">
-                  (max. 10,000)
-                </span>
-              </label>
-              <textarea name="description"
-                defaultValue={data.description}
-                className="bg-gray-50 dark:bg-neutral-800 text-text w-full p-2.5 rounded-lg"
-                placeholder="Nasza firma zajmuje się..."
-                maxLength={10000}
-                rows={6}
-              />
-            </div>
-
-            <div className="mb-6">
               <label className="block mb-2 text-lg text-text">Deadline*</label>
               <input name="deadline"
                 defaultValue={data.deadline}
@@ -64,6 +58,30 @@ export function PublishPostComponent({
               />
             </div>
           </div>
+
+          <div className="mb-6">
+              <label className="block mb-2 text-lg text-text">Description
+                <span className="text-gray-500 dark:text-gray-400 text-sm ml-2">
+                  (max. 10,000)
+                </span>
+              </label>
+              <textarea
+                name="description"
+                className="block p-2.5 w-full mb-12 rounded-lg text-lg bg-gray-50 dark:bg-neutral-800 text-text"
+                rows={15}
+                defaultValue={data.description}
+                onChange={handleLivePreview}
+                maxLength={8000}
+              />
+            </div>
+
+          <p className="text-3xl text-text mt-12 mb-4">Description preview:</p>
+          <article className="p-3 border-b border-t border-gray-300 dark:border-neutral-800 mb-12">
+            <div
+              className="prose dark:prose-invert lg:prose-xl"
+              dangerouslySetInnerHTML={{ __html: preview }}
+            />
+          </article>
 
           <button
             type="submit"

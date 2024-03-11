@@ -1,4 +1,4 @@
-import { Listing } from '@/components/startups/Listing';
+import { Listing } from '@/components/tasks/Listing';
 import { createClient } from '@/utils/supabase/server';
 import { cookies } from 'next/headers';
 

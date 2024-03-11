@@ -1,5 +1,5 @@
 import { update } from "@/actions/tasks";
-import { PublishPostComponent } from "@/components/startups/profile/PublishForm";
+import { PublishPostComponent } from "@/components/tasks/profile/PublishForm";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

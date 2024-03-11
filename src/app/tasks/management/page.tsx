@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { fetchUser } from "@/actions/user";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { Listing } from "@/components/startups/Listing";
+import { Listing } from "@/components/tasks/Listing";
 
 
 export default async function PageManagement() {

@@ -5,6 +5,7 @@ type NavRoutes = Array<{
 
 // Default navigation for all users
 const navigation: NavRoutes = [
+    { name: 'Home', href: '/' },
     { name: 'Tasks', href: '/tasks' },
     { name: 'Leaderboard', href: '/leaderboard' },
     { name: 'People', href: '/people' },

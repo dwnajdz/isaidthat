@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
-import { PublishPostComponent } from "@/components/startups/profile/PublishForm";
+import { PublishPostComponent } from "@/components/tasks/profile/PublishForm";
 
 // server actions
 import { fetchUser } from "@/actions/user";
