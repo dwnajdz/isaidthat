@@ -62,6 +62,7 @@ async function rangeQuery(ascending = false, from: number, to: number): Promise<
   const { data: job_postings, error } = await supabase
     .from(DB_TABLE_NAME)
     .select()
+    .eq('done', 'FALSE') 
     .order('id', { ascending: ascending })
     .range(from, to);
 

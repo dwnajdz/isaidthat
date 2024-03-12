@@ -22,7 +22,7 @@ export default async function PageManagement() {
 
   return (
     <div className="w-full max-w-[85rem] mx-auto py-24">
-      <Listing startupList={userData} showSearchBar={false} headerText="Moje oferty" />
+      <Listing list={userData} showSearchBar={false} headerText="Your tasks" />
     </div>
   );
 }

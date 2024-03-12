@@ -24,27 +24,27 @@ async function isUserOwner(
   return user?.id === offer.owner;
 }
 
-export default async function DeletePost({ params }: { params: { id: string } }) {
+export default async function MarkDone({ params }: { params: { id: string } }) {
   const supabase = createClient(cookies());
 
   const user: User | null = await fetchUser(supabase)
   if (user === null) {
-    return redirect(`/tasks/profile/${params.id}?error=user not authenticated`);
+    return redirect(`/tasks/${params.id}?error=user not authenticated`);
   }
 
   const isOwner: boolean = await isUserOwner(supabase, user, params.id)
   if (!isOwner) {
-    return redirect(`/startups/profile/${params.id}?error=user not owner`);
+    return redirect(`/tasks/${params.id}?error=user not owner`);
   }
 
   const { error } = await supabase
     .from(DB_TABLE_NAME)
-    .delete()
+    .update({done: true})
     .eq('id', params.id);
 
   if (error) {
-    return redirect(`/startups/profile/${params.id}?error=could not delete offer`);
+    return redirect(`/tasks/${params.id}?error=could not mark task as done`);
   }
 
-  return redirect(`/startups/management?delete=success`);
+  return redirect(`/tasks/management?done=success`);
 }

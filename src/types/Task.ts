@@ -19,6 +19,7 @@ type Task = {
 
   // user
   owner: string | null;
+  owner_name: string | null;
 };
 
 function getForm<Type>(name: string, formData: FormData): Type {

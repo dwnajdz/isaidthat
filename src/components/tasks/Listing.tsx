@@ -25,7 +25,7 @@ function Listing({
 
       {showSearchBar && <SearchBar searchParams={searchParams} />}
 
-      <div className="md:col-span-3 lg:col-span-4" id="startup-listing-cards">
+      <div className="md:col-span-3 lg:col-span-4" id="tasks">
         {list?.map((data, index) =>
           <ListingCard data={data} key={index} />
         )}
@@ -45,20 +45,21 @@ function ListingCard({
     pb-4 rounded-none md:rounded-lg mb-0 md:mb-4" id={data?.id}>
       <div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-between px-4 py-4 rounded-md">
         <div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
+          <img src={' '} className="rounded-full w-20 h-20" width={20} height={20} loading="lazy" />
+
           <div>
             <h3>
               <span className="font-semibold text-lg text-text">
-                user15{' '}
+                {data?.owner_name}{' '}
               </span>
-              <span className="m-2 text-lg font-bold text-text mb-1">1</span>
+              <span className="m-2 text-lg font-bold text-text mb-1">{data?.id}</span>
             </h3>
 
             <Link href={url} className="font-bold tracking-wide mt-2 text-2xl text-text hover:text-primary">{data?.title}</Link>
-            <p className="mt-1 leading-2 text-[#1e2826] dark:text-gray-300">{data?.description}</p>
             <div className="grid grid-cols-2 md:flex md:items-center gap-3 mt-2">
-              <span className="bg-secondary text-text rounded-lg px-3 py-1 text-sm">
-                {data?.deadline}
-              </span>
+              <p className="bg-secondary text-text rounded-lg px-3 py-1 text-sm">
+                Deadline: <span className="font-bold">{data?.deadline}</span>
+              </p>
             </div>
           </div>
         </div>

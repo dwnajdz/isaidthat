@@ -42,7 +42,7 @@ export function PublishPostComponent({
               <input name="title"
                 defaultValue={data.title}
                 className="bg-gray-50 dark:bg-neutral-800 text-text w-full p-2.5 rounded-lg"
-                placeholder="NaszStartup AI"
+                placeholder="Visit mother in law"
                 required
               />
             </div>
@@ -53,7 +53,6 @@ export function PublishPostComponent({
                 defaultValue={data.deadline}
                 type="date"
                 className="bg-gray-50 dark:bg-neutral-800 text-text w-full p-2.5 rounded-lg"
-                placeholder="Rozwijamy sztuczną inteligencję"
                 required
               />
             </div>

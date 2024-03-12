@@ -12,20 +12,20 @@ function TaskPost({
     <article className="w-full max-w-[110rem] p-3">
       <div className="max-w-6xl py-24 mx-auto">
         <TaskHeader data={data ?? {}} editView={editView} />
-        <p className="text-xl mb-6 text-primary_hover hover:text-red-500">Deadline:
+        <p className="text-xl mb-6 text-primary_hover">Deadline:
           <span className="text-2xl font-bold"> {data.deadline}</span>
         </p>
 
-        <div className="space-y-5 md:space-y-8">
+        <div className="space-y-5 md:space-y-8 mb-12">
           <TaskBody postContent={data?.description} />
-
-          {editView &&
-            <Link href={"/task/done"} rel="nofollow noopener" title="Mark this task as done!" className="bg-green-700 hover:bg-green-800 text-white font-bold
-            text-lg px-6 md:w-52 py-4 rounded-md flex gap-1 items-center">
-              Mark as Done
-            </Link>
-          }
         </div>
+
+        {(editView && !data?.done) &&
+          <Link href={`/tasks/management/done/${data.id}`} title="Mark this task as done!" className="bg-green-700 hover:bg-green-800 text-white font-bold
+            text-lg rounded-md items-center text-center p-5">
+            Mark as Done
+          </Link>
+        }
       </div>
     </article>
   )
@@ -42,8 +42,8 @@ function TaskHeader({
 
   // so user dont have to search back for data
   const backUrl: string = `/tasks#${data.id}`
-  const editUrl: string = `/company/posts/edit/${data.id}`
-  const deleteUrl: string = `/company/posts/delete/${data.id}`
+  const editUrl: string = `/tasks/management/edit/${data.id}`
+  const deleteUrl: string = `/tasks/management/delete/${data.id}`
 
   return (
     <header>
@@ -93,13 +93,13 @@ function TaskHeader({
                 </ul>
               </div>
 
-              <div className="space-y-5">
+              <div className="grid space-y-3">
                 <Link href="/" title="I believe in this guy, he is gonna do that."
-                  className="bg-primary hover:bg-primary_hover text-text text-lg px-6 md:px-12 py-4 rounded-md flex gap-1 items-center">
+                  className="bg-primary hover:bg-primary_hover text-text text-lg rounded-md px-6 py-4 items-center">
                   Believe - {data.upvotes}
                 </Link>
                 <Link href="/" title="He is not going to do this task."
-                  className="bg-secondary hover:bg-accent text-text text-lg px-6 md:px-12 py-4 rounded-md flex gap-1 items-center">
+                  className="bg-secondary hover:bg-accent text-text text-lg px-6 py-4 rounded-md items-center">
                   Doubt - {data.downvotes}
                 </Link>
               </div>
