@@ -53,5 +53,5 @@ function formToTask(formData: FormData, user_id: string | null): Task {
   return model;
 }
 
-export { formToTask };
+export { formToTask, getForm };
 export type { Task };

@@ -24,7 +24,7 @@ export default function Login({
     if (error) {
       return redirect('/login?message=Could not authenticate user');
     }
-    return redirect('/startups/management');
+    return redirect('/tasks/management');
   }
 
   const signUp = async (formData: FormData) => {
