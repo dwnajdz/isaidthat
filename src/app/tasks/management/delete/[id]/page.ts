@@ -29,12 +29,12 @@ export default async function DeletePost({ params }: { params: { id: string } })
 
   const user: User | null = await fetchUser(supabase)
   if (user === null) {
-    return redirect(`/tasks/profile/${params.id}?error=user not authenticated`);
+    return redirect(`/tasks/${params.id}?error=user not authenticated`);
   }
 
   const isOwner: boolean = await isUserOwner(supabase, user, params.id)
   if (!isOwner) {
-    return redirect(`/startups/profile/${params.id}?error=user not owner`);
+    return redirect(`/tasks/${params.id}?error=user not owner`);
   }
 
   const { error } = await supabase
@@ -43,8 +43,8 @@ export default async function DeletePost({ params }: { params: { id: string } })
     .eq('id', params.id);
 
   if (error) {
-    return redirect(`/startups/profile/${params.id}?error=could not delete offer`);
+    return redirect(`/tasks/${params.id}?error=could not delete offer`);
   }
 
-  return redirect(`/startups/management?delete=success`);
+  return redirect(`/tasks/management?delete=success`);
 }
