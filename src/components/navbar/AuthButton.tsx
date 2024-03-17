@@ -2,7 +2,6 @@ import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { fetchUserNumOffers } from '@/actions/payment_managment'
 
 const getUser = async () => {
   const cookieStore = cookies();
@@ -45,7 +44,7 @@ async function AuthButton({
       ))}
       <form action={signOut}>
         <button className="py-2 px-4 rounded-md no-underline border border-primary hover:bg-primary_hover hover:underline text-text">
-          Wyloguj
+          Logout
         </button>
       </form>
       {user &&
@@ -90,7 +89,7 @@ async function MobileAuthButton({
       <form action={signOut} className="-mx-3 bg-secondary hover:bg-text block rounded-lg px-3 text-xl leading-7 text-gray-900  
         hover:text-accent dark:text-gray-300">
         <button className='w-full py-3 text-left'>
-          Wyloguj
+          Logout
         </button>
       </form>
       {user &&
