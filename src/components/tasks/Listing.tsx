@@ -1,19 +1,26 @@
+'use client'
+
 import Link from "next/link"
 import { SearchBar } from "../SearchBar"
 import { Task } from "@/types/Task";
+import { useState } from "react";
 
 function Listing({
   list,
   showSearchBar = true,
   searchParams,
   totalPosts,
-  headerText = "Results"
+  headerText = "Results",
+  upvoteAction,
+  downvoteAction,
 }: {
   list: Array<Task> | null,
   showSearchBar?: boolean,
   searchParams?: any | null,
   totalPosts?: number,
   headerText?: string,
+  upvoteAction: any,
+  downvoteAction: any,
 }) {
   return (
     <div id="tasks" title="Available tasks">
@@ -27,7 +34,7 @@ function Listing({
 
       <div className="md:col-span-3 lg:col-span-4" id="tasks">
         {list?.map((data, index) =>
-          <ListingCard data={data} key={index} />
+          <ListingCard data={data} key={index} upvoteAction={upvoteAction} downvoteAction={downvoteAction} />
         )}
       </div>
     </div>
@@ -36,9 +43,21 @@ function Listing({
 
 function ListingCard({
   data,
+  upvoteAction,
+  downvoteAction
 }: {
   data?: Task,
+  upvoteAction: any,
+  downvoteAction: any
 }) {
+  const [upvotes, setUpvotes] = useState(data?.upvotes ?? 0);
+  const [downvotes, setDownvotes] = useState(data?.downvotes ?? 0);
+
+  const addUpvote = async (e: any) => {
+    setUpvotes(upvotes + 1);
+    await upvoteAction(data?.id, upvotes);
+  };
+
   const url = `/tasks/${data?.id}`;
   return (
     <article className="w-full bg-[#e1e1e1] dark:bg-[#1e1e1e] dark: border border border-gray-300 dark:border-neutral-700 
@@ -63,16 +82,20 @@ function ListingCard({
             </div>
           </div>
         </div>
-        <div className="md:max-w-[12rem] w-full mt-6 md:mt-0">
+        <div className="md:max-w-[15rem] w-full mt-6 md:mt-0">
           <div className="space-y-5">
-            <Link href="/" title="I believe in this guy, he is gonna do that."
-              className="bg-primary hover:bg-primary_hover text-text text-lg px-12 py-4 rounded-md flex gap-1 items-center">
-              Believe - {data?.upvotes}
-            </Link>
-            <Link href="/" title="He is not going to do this task."
-              className="bg-secondary hover:bg-accent text-text text-lg px-12 py-4 rounded-md flex gap-1 items-center">
-              Doubt - {data?.downvotes}
-            </Link>
+            <form action={addUpvote}>
+              <button type="submit" title="I believe in this guy, he is gonna do that."
+                className="bg-primary hover:bg-primary_hover text-text text-lg px-12 py-4 rounded-md flex gap-1 items-center">
+                Believe - {upvotes}
+              </button>
+            </form>
+            <form>
+              <button type="submit" title="He is not going to do this task."
+                className="bg-secondary hover:bg-accent text-text text-lg px-12 py-4 rounded-md flex gap-1 items-center">
+                Doubt - {downvotes}
+              </button>
+            </form>
           </div>
         </div>
       </div>

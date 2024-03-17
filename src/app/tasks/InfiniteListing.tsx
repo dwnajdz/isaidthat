@@ -3,7 +3,8 @@ import { useRef, useState } from "react";
 import InfiniteScroll from "./InfiniteScroll";
 import { useRouter } from "next/navigation";
 import { Listing } from "@/components/tasks/Listing";
-import { rangeQuery} from "@/actions/tasks";
+import { rangeQuery } from "@/actions/tasks";
+import { addDownvote, addUpvote } from "@/actions/votes";
 
 type ItemsProps = {
   initialItems: Array<any>;
@@ -58,7 +59,7 @@ export default function InfiniteListing({ initialItems, totalPosts, PAGE_VIEW_LI
       }
       element="main"
     >
-      <Listing list={items} showSearchBar={true} totalPosts={totalPosts} />
+      <Listing list={items} showSearchBar={true} totalPosts={totalPosts} upvoteAction={addUpvote} downvoteAction={addDownvote} />
     </InfiniteScroll>
   );
 }
