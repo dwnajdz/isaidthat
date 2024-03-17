@@ -3,7 +3,7 @@ import { getForm } from "./Task";
 type Profile = {
   id: string;
   inserted_at: string;
-  
+
   username: string;
   image_url?: string;
 
@@ -12,6 +12,7 @@ type Profile = {
 
   upvotes: number;
   downvotes: number;
+  voted_id: number[];
 
   activated: boolean;
   user_id: string;

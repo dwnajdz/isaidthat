@@ -54,8 +54,12 @@ function ListingCard({
   const [downvotes, setDownvotes] = useState(data?.downvotes ?? 0);
 
   const addUpvote = async (e: any) => {
+    const error = await upvoteAction(data?.id, upvotes + 1);
+    if (error) {
+      return;
+    }
+
     setUpvotes(upvotes + 1);
-    await upvoteAction(data?.id, upvotes);
   };
 
   const url = `/tasks/${data?.id}`;
@@ -90,6 +94,7 @@ function ListingCard({
                 Believe - {upvotes}
               </button>
             </form>
+            
             <form>
               <button type="submit" title="He is not going to do this task."
                 className="bg-secondary hover:bg-accent text-text text-lg px-12 py-4 rounded-md flex gap-1 items-center">
